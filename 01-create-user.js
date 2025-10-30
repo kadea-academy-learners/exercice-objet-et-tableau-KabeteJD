@@ -13,11 +13,11 @@ La fonction doit retourner un objet contenant ces trois propriétés :
 */
 
  /**
- * Crée un objet représentant un utilisateur.
+ * Crée un objet utilisateur avec les propriétés reçues.
  *
  * @param {string} nom - Le nom de l'utilisateur.
- * @param {any} age - L'âge de l'utilisateur (peut être un nombre ou une chaîne).
- * @param {any} estConnecté - Statut de connexion (peut être un booléen ou une chaîne).
+ * @param {any} age - L'âge de l'utilisateur (peut être number ou string).
+ * @param {any} estConnecté - Statut de connexion (peut être boolean ou string).
  * @returns {{ nom: string, age: any, estConnecté: any }} - Objet utilisateur.
  */
 function createUser(nom, age, estConnecté) {
@@ -27,6 +27,10 @@ function createUser(nom, age, estConnecté) {
     estConnecté,
   };
 }
+
+// ✅ Exemple d'utilisation pour affichage manuel
+const exemple = createUser("Jean", 42, true);
+console.log("Utilisateur créé :", exemple);
 
 module.exports = {
   createUser,
