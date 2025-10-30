@@ -12,11 +12,24 @@ La fonction doit retourner un objet contenant ces trois propriétés :
     - estConnecte (boolean)
 */
 
-function createUser() {
-    
+ /**
+ * Crée un objet représentant un utilisateur.
+ *
+ * @param {string} nom - Le nom de l'utilisateur.
+ * @param {any} age - L'âge de l'utilisateur (peut être un nombre ou une chaîne).
+ * @param {any} estConnecté - Statut de connexion (peut être un booléen ou une chaîne).
+ * @returns {{ nom: string, age: any, estConnecté: any }} - Objet utilisateur.
+ */
+function createUser(nom, age, estConnecté) {
+  return {
+    nom,
+    age,
+    estConnecté,
+  };
 }
 
 module.exports = {
-    createUser,
+  createUser,
 };
+
 
