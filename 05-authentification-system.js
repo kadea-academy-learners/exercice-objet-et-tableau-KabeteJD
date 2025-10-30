@@ -20,12 +20,70 @@
 
 const baseDeDonnees = [];
 
+/**
+ * Inscrit un nouvel utilisateur dans la base de données.
+ *
+ * @param {string} nom
+ * @param {string} email
+ * @param {string} password
+ * @param {string} confirmPassword
+ * @returns {object|string}
+ */
 function signUp(nom, email, password, confirmPassword) {
-	
+  const emailExiste = baseDeDonnees.some(user => user.email === email);
+  if (emailExiste) {
+    return "Erreur: cet email existe déjà";
+  }
+
+  if (password !== confirmPassword) {
+    return "Erreur: les mots de passe ne correspondent pas";
+  }
+
+  const nouvelUtilisateur = {
+    id: baseDeDonnees.length + 1,
+    nom,
+    email,
+    password,
+    estConnecte: false,
+    estBloque: false,
+  };
+
+  baseDeDonnees.push(nouvelUtilisateur);
+  return nouvelUtilisateur;
 }
 
-function login() {
-	
+/**
+ * Connecte un utilisateur existant.
+ *
+ * @param {string} email
+ * @param {string} password
+ * @returns {object|string}
+ */
+function login(email, password) {
+  const utilisateur = baseDeDonnees.find(user => user.email === email);
+
+  if (!utilisateur) {
+    return "Erreur: utilisateur non trouvé";
+  }
+
+  if (utilisateur.password !== password) {
+    return "Erreur: mot de passe incorrect";
+  }
+
+  if (utilisateur.estBloque) {
+    return "Erreur: utilisateur bloqué";
+  }
+
+  utilisateur.estConnecte = true;
+  return utilisateur;
 }
+
+// 🔍 Ligne d'affichage pour test manuel
+const inscrit = signUp("Jean", "jean@email.com", "abc123", "abc123");
+console.log("Inscription :", inscrit);
+
+const connecté = login("jean@email.com", "abc123");
+console.log("Connexion :", connecté);
 
 module.exports = { baseDeDonnees, signUp, login };
+
